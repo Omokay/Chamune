@@ -8,10 +8,6 @@ const bcrypt = require('bcrypt');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
-const cors = require('cors');
-
-
-
 
 dotenv.config();
 
@@ -21,10 +17,22 @@ const Hospital = require('./server/models/hospitalSchema');
 const {secretKey} = process.env;
 
 const app = express();
+const cors = require('cors');
 
-app.use(cors({
-    origin: '*'
-}));
+
+const corsOpts = {
+    origin: '*',
+
+    methods: [
+        'GET','OPTIONS','PATCH','DELETE','POST','PUT'
+    ],
+
+    allowedHeaders: [
+        'Content-Type',
+    ],
+};
+
+app.use(cors(corsOpts));
 
 app.use(logger('dev'));
 app.use(express.json());
