@@ -8,6 +8,10 @@ const bcrypt = require('bcrypt');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
+const cors = require('cors');
+
+
+
 
 dotenv.config();
 
@@ -17,6 +21,10 @@ const Hospital = require('./server/models/hospitalSchema');
 const {secretKey} = process.env;
 
 const app = express();
+
+app.use(cors({
+    origin: ['https://639fb6ace97dd3787e98a060--quizzical-leavitt-78bc04.netlify.app/',]
+}));
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -73,7 +81,7 @@ passport.use(
     }));
 
 
-const port = 1990;
+const port = process.env.PORT || 1819;
 app.listen(port,() => `Server is running @ ${port}`)
 
 module.exports = app;
