@@ -23,7 +23,7 @@ const {secretKey} = process.env;
 const app = express();
 
 app.use(cors({
-    origin: ['https://639fb6ace97dd3787e98a060--quizzical-leavitt-78bc04.netlify.app/',]
+    origin: '*'
 }));
 
 app.use(logger('dev'));
